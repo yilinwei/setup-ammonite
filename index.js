@@ -1,5 +1,6 @@
 const core = require('@actions/core');
-const github = require('@actions/github');
+const io = require('@actions/io');
+const exec = require('@actions/exec');
 const tc = require('@actions/tool-cache');
 const fs = require('fs');
 const os = require('os');
@@ -12,19 +13,19 @@ async function run() {
   try {
     const ammVersion = core.getInput('ammonite-version');
     const scalaVersion = core.getInput('scala-version');
-    var cachedMillPath = tc.find('amm', ammVersion);
-    if (!cachedMillPath) {
+    var cachedAmmonitePath = tc.find('amm', ammVersion);
+    if (!cachedAmmonitePath) {
       core.info('no cached version found');
-      core.info('downloading mill');
+      core.info('downloading ammonite');
       const downloadPath = await tc.downloadTool(`https://github.com/lihaoyi/Ammonite/releases/download/${ammVersion}/${scalaVersion}-${ammVersion}`);
-      await io.mkdirP(millPath);
+      await io.mkdirP(ammonitePath);
       await io.cp(downloadPath, `${ammonitePath}/amm`, { force: true });
       fs.chmodSync(`${ammonitePath}/amm`, '0755')
-      cachedMillPath = await tc.cacheDir(millPath, 'mill', millVersion);
+      cachedAmmonitePath = await tc.cacheDir(ammonitePath, 'amm', ammonitePath);
     } else {
-      core.info(`using cached version of mill: ${cachedMillPath}`);
+      core.info(`using cached version of amm: ${cachedAmmonitePath}`);
     }
-    core.addPath(cachedMillPath);
+    core.addPath(cachedAmmonitePath);
 
     // warm up ammonite
     await exec.exec('amm', ['--help']);
