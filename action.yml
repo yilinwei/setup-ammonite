@@ -1,0 +1,16 @@
+name: 'Setup ammonite'
+description: 'Setup and install ammonite'
+inputs:
+  ammonite-version:  # id of input
+    description: 'Ammonite version'
+    required: true
+    default: '2.0.4'
+  scala-version:
+    description: 'Scala version'
+    default: '2.13'
+outputs:
+  time: # id of output
+    description: 'The time we we greeted you'
+runs:
+  using: 'node12'
+  main: 'index.js'
