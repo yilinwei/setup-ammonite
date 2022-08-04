@@ -19,7 +19,8 @@ async function run() {
       core.info('downloading ammonite');
       const downloadPath = await tc.downloadTool(`https://github.com/lihaoyi/Ammonite/releases/download/${ammVersion}/${scalaVersion}-${ammVersion}`);
       await io.mkdirP(ammonitePath);
-      await io.cp(downloadPath, `${ammonitePath}/amm`, { force: true });
+      const targetPath = process.platform === 'win32' ? `${ammonitePath}/amm.bat` : `${ammonitePath}/amm`;
+      await io.cp(downloadPath, targetPath, { force: true });
       fs.chmodSync(`${ammonitePath}/amm`, '0755')
       cachedAmmonitePath = await tc.cacheDir(ammonitePath, 'amm', ammonitePath);
     } else {
