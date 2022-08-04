@@ -23,7 +23,7 @@ jobs:
     - name: Checkout project
       uses: actions/checkout@v2
     - name: Run action
-      uses: yilinwei/setup-ammonite@master
+      uses: yilinwei/setup-ammonite@yilinwei-patch-1
       with:
         ammonite-version: 2.5.4
         scala-version: 3.1
