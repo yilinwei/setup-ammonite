@@ -25,6 +25,7 @@ async function run() {
     } else {
       core.info(`using cached version of amm: ${cachedAmmonitePath}`);
     }
+   
     core.addPath(cachedAmmonitePath);
 
     // warm up ammonite
