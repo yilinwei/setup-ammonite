@@ -13,7 +13,7 @@ jobs:
     - name: Checkout project
       uses: actions/checkout@v2
     - name: Run action
-      uses: yilinwei/setup-ammonite@remove-add-path
+      uses: yilinwei/setup-ammonite@master
       with:
-        ammonite-version: 2.0.4
-        scala-version: 2.13
+        ammonite-version: 2.5.4
+        scala-version: 3.1
