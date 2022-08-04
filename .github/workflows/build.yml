@@ -8,7 +8,17 @@ on:
 
 jobs:
   build:
-   runs-on: ubuntu-latest
+   strategy:
+      matrix:
+        include:
+        - name: Windows
+          os: windows-latest
+        - name: MacOS
+          os: macos-latest
+        - name: Linux
+          os: ubuntu-latest
+   name: ${{ matrix.name }}
+   runs-on: ${{ matrix.os }}
    steps:
     - name: Checkout project
       uses: actions/checkout@v2
